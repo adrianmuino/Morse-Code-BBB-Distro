@@ -4,12 +4,19 @@ Special Debian Linux distribution that contains morse code character driver as p
 # Requirements
 * microSD card larger than 2 GB and less than 32 GB.
 * micro SD card reader (with support for USB 3.0 if possible).
+* Linux Ubuntu Virtual Machine with internet connection.
 
-## Install VirtualBox
-Download and install the latest version of VirtualBox for your host system. You can use this link for [VirtualBox 6.1.16 platform packages](https://www.virtualbox.org/wiki/Downloads).
+## Step 1: Connecting your microSD card to your Ubuntu VM.
 
-## Install VirtualBox Extension Pack
-Download and install the latest version of the VirtualBox Extension Pack to support USB3.0 devices. You will need this if using a modern microSD card. You can use this link for [VirtualBox 6.1.16 Oracle VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads).
+### Install VirtualBox
+Download and install the latest version of VirtualBox for your host system. You can use this link for [VirtualBox 6.1.16 platform packages](https://www.virtualbox.org/wiki/Downloads). Set it up using the wizard installer.
+
+### Install VirtualBox Extension Pack
+Download and install the latest version of the VirtualBox Extension Pack to support USB3.0 devices. You will need this if using a modern microSD card. You can use this link for [VirtualBox 6.1.16 Oracle VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads). Set it up using the wizard installer.
+
+Open your VirtualBox Ubuntu VM. Go to Settings >> Ports >> USB. Enable the USB 3.0 Controller.
+
+
 
 ```bash
 pip install wxPython
