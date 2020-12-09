@@ -16,13 +16,11 @@ Download and install the latest version of the VirtualBox Extension Pack to supp
 
 Open your VirtualBox Ubuntu VM. Go to Settings >> Ports >> USB. Enable the USB 3.0 Controller.
 
-
-
+## Step 2: Partitioning and formatting your microSD card.
+Open a Terminal window.
+Download and install the gparted utility
 ```bash
-pip install wxPython
-pip install faker
-pip install pandas
-pip install matplotlib
+sudo apt-get install gparted
 ```
 
 Once done with installing the required dependencies, to run this application open a Terminal/Command Line Prompt window, navigate to the directory where the file app.py is found, and do:
