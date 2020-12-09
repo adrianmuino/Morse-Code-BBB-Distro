@@ -142,28 +142,28 @@ cd linux
 ```
 
 Set the kernel version to the latest version
-```
+```bash
 git checkout 4.1
 ```
 
 Change directory into the Linux character drivers directory
-```
+```bash
 cd ~/[proj_directory]/linux/drivers/char
 ```
 
-Make a directory for the driver and change into this directory. Here you will put the driver source code and the Makefile to compile the driver source code. This directory must be the same name as the driver name when it get loaded. We use _morse_bbb_ for the directory name since in this tutorial the driver name is _morse_bbb.c_.
+Make a directory for the driver and change into this directory. Here you will put the driver source code and the Makefile to compile the driver source code. This directory must be the same name as the driver name when it get loaded. We use _mcode_ for the directory name since in this tutorial the driver name is _mcode.c_.
 
-Create a Makefile in this directory that looks like this::
+Create a Makefile in this directory that looks like this:
 
 Modify the Kconfig file in the parent directory.
 ```bash
-obj-$(CONFIG_MORSEBBB) += morsebbb.o
+obj-$(CONFIG_MCODE) += mcode.o
 ```
 
 The Kconfig file should include the following lines under _Character Drivers_:
 ```bash
-config MORSEBBB
-	tristate “Morse Driver”
+config MCODE
+	tristate “Morse Code Driver”
 	default m
 	---help---
 		Select this option to enable the morse driver
@@ -171,12 +171,23 @@ config MORSEBBB
 
 Modify the Makefile. The Makefile include the following line this:
 ```bash
-obj-$(CONFIG_MORSEBBB) += morsebbb/
+obj-$(CONFIG_MCODE) += mcode/
 ```
 
 Change into the cloned BeagleBone Black kernel directory.
+```bash
+cd ~/[proj_directory]/linux/
+```
 
-W
+Run the following command to set up the gconfig for the BeagleBone. This command will write the default BeagleBone Black configurations to the _.config_ file.
+```bash
+sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bb.org_defconfig
+```
+
+Run the following command to open gconfig.
+```bash
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- gconfig
+```
 
 sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CFLAGS_MODULE=-fno-pic -j4 modules
 
