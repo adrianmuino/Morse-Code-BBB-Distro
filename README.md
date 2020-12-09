@@ -230,12 +230,13 @@ cd /media/[username]/RFS/etc/rc5.d
 ```
 
 Open the _S01networking_ script file that runs when the kernel is getting initialized. You could use your own run-level script but for simplicity we will use the run-level script that initializes networking capabilities. Write the following lines of code under the line that mentions the _PATH_ variable:
-
+```bash
 echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger
 echo none > /sys/class/leds/beaglebone\:green\:usr1/trigger
 echo none > /sys/class/leds/beaglebone\:green\:usr2/trigger
 echo none > /sys/class/leds/beaglebone\:green\:usr3/trigger
 echo “Welcome to Embedded Linux” > /dev/mcode
+```
 
 The above lines turn off all the user leds of the BBB and writes to our _mcode_ driver that is now part of the kernel.
 
