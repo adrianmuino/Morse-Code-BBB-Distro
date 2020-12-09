@@ -34,20 +34,20 @@ Once done, open the gparted Graphical User Interface that will allow you to form
 sudo gparted
 ```
 
-Once done with installing the required dependencies, to run this application open a Terminal/Command Line Prompt window, navigate to the directory where the file app.py is found, and do:
-```bash
-python app.py
-```
-### Note
-If you had any of the dependencies listed above already pre-installed in your machine, then you might receive an error when trying to run the application. To fix this you will need to uninstall the four dependencies listed above and reinstall them. Alternatively, you can create a new python virtual environment and install the depencies, and run the application from within the virtual environment.
+Choose your microSD card on the top-right corner of the gparted GUI. **Make sure to choose the correct device. If you choose the incorrect device, you may destroy your machine's file system and cause irreversible damages.** Usually your machine's disk driver is called _sda_ and your microSD is called _sdb_ if you only have to devices connected. Be sure that you choose the right device before continuing.
 
-## Usage
-Once the application is opened, the user will need to generate IoT data by clicking "File", and then clicking "Generate IoT".
-After data has been generated, the user can:
+Click on all the partition(s) of the device that have been allocated. On the menu bar go to Partition >> Unmount. **Leave the unallocated partition alone.**
 
-* Save data as a JSON file.
-* Save data as a CSV file.
-* Compute common statistical values for the sensor data gathered.
-* Plot four different histograms of the outside temperature sampled every 6 hours.
-* Plot a line graph of the outside temperature vs the room temperature.
-* Plot four histograms of room and outside temperature and humidity for all 1000 user entries.
+After unmounting the partition(s) select the Delete icon.
+
+Select the Checkmark icon to apply the changes made to the microSD card.
+
+Click the Apply button in the prompt that pops up. If All operation are successfully completed then click the Close button.
+
+Once all the partitions of the microSD have been cleared, we create the new partitions necessary for the boot loader (Das U-Boot) and for the Linux Root File System.
+
+Click on the unallocated partition of the microSD and select the New icon to create a new partition.
+
+The first partition will be the boot loader partition. Assign around _1 GB_ of space for this partition and the File System format will be _fat32_. **You must use the Label name _BOOT_ or else U-Boot will not function properly.** Use the partition configurations as shown below and click Add.
+
+The second partition will be the Linux Root File System partition. Assign _all of the remaining space_ for this partition and the File System format will be _ext4_. Use the Label "RFS" to indicate that this is the RFS. Use the partition configurations as shown below and click Add.
