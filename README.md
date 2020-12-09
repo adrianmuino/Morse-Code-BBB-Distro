@@ -65,3 +65,27 @@ sudo rm -rf *
 cd /media/[username]/BOOT
 sudo rm -rf *
 ```
+
+## Step 3: Setting up the boot loader (Das U-Boot)
+Install the required OpenSSL libssl-dev package.
+```bash
+sudo apt-get install libssl-dev
+```
+Install and set up git.
+```bash
+sudo apt-get install git
+sudo git config --global user.email "[your_email@here]"
+```
+
+Install the flex bison package.
+```bash
+sudo apt-get install flex bison
+```
+
+Get the latest version of the code for u-boot. _As of December 8, 2020 it is u-boot-2020.10_
+```bash
+wget ftp://ftp.denx.de/pub/u-boot/u-boot-[version].tar.bz2
+tar -xjf u-boot-[version].tar.bz2
+```
+
+cd u-boot
