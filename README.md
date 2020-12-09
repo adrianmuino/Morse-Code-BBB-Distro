@@ -90,9 +90,21 @@ sudo apt-get install flex bison
 make sandbox_defconfig tools-only
 ```
 
+Install the cross-compiler for the BeagleBone Black processor.
+```bash
+sudo apt-get install gcc-arm-linux-gnueabihf
+sudo apt-get install gcc-arm-linux-gnueabi
+```
+
 Install the mkimage program to create the u-boot image.
 ```bash
 sudo install tools/mkimage /usr/local/bin
+```
+
+Configure u-boot for the BeagleBone Black
+```bash
+cd u-boot-[version]
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- am335x_boneblack_vboot_defconfig
 ```
 
 Cross compile u-boot.
@@ -100,3 +112,4 @@ Cross compile u-boot.
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
 ```
 
+## Step 4: Setting up the boot loader (Das U-Boot)
