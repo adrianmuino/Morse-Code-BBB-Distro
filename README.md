@@ -16,8 +16,11 @@ Download and install the latest version of the VirtualBox Extension Pack to supp
 
 Open your VirtualBox Ubuntu VM.
 Go to Settings >> Ports >> USB. Enable the USB 3.0 Controller. 
+
 Start your VirtualBox Ubuntu VM. Connect your microSD card. 
+
 On the menu bar of VirtualBox go to Devices >> USB and choose your microSD card. 
+
 Once you choose your microSD card is properly inserted on your VM, it should display a check mark next to it and a USB icon will display in the bottom left.
 
 ## Step 2: Partitioning and formatting your microSD card.
