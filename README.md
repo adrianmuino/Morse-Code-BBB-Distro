@@ -256,3 +256,10 @@ Once your serial cable is recognized by your Ubuntu VM, run the following comman
 sudo picocom -b 115200 /dev/tty/USB0
 ```
 Finally boot your BeagleBone Black from the microSD card as shown [here](https://elinux.org/Beagleboard:Booting_Ubuntu_on_BeagleBoard_Black) and enjoy your custom Linux distro with a Morse Code Driver cooked into it that welcomes you saying "Welcome to Embedded Linux" in morse code using the user LED0.
+
+# Troubleshooting
+There are many difficulties that you can run into when attempting this project. 
+* If you are getting errors while setting up _u-boot_ you should make sure you are trying to use the latest version of _u-boot_.
+* If your are having trouble connecting your devices to VirtualBox, make sure that you have the Extension Packs installed and your USB settings in your VM match the settings of the device that you are connecting. For example: A USB3.0 device requires the USB3.0 controller settings on VirtualBox.
+* If you are having issues compiling the kernel you should double check that you are trying to get the most up to date version of the Linux kernel, and that your Kconfig, Makefiles, and c source files are correct.
+* If you compiled the kernel and set up the microSD but cannot boot the BBB drom the microSD, your issue is probably that you may be holding the S2 button on the BBB when you don't need to any more. Also make sure that the serial cable is connected before you connect the BBB.
