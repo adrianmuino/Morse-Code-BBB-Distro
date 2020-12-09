@@ -6,7 +6,7 @@ Special Debian Linux distribution that contains morse code character driver as p
 * micro SD card reader (with support for USB 3.0 if possible).
 
 ## Install VirtualBox
-Download and install the latest version of VirtualBox for your host system. You can use this link for [VirtualBox 6.1.16 platform packages (https://www.virtualbox.org/wiki/Downloads).
+Download and install the latest version of VirtualBox for your host system. You can use this link for [VirtualBox 6.1.16 platform packages](https://www.virtualbox.org/wiki/Downloads).
 
 ## Install VirtualBox Extension Pack
 Download and install the latest version of the VirtualBox Extension Pack to support USB3.0 devices. You will need this if using a modern microSD card. You can use this link for [VirtualBox 6.1.16 Oracle VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads).
