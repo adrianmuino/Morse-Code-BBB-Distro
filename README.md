@@ -51,3 +51,17 @@ Click on the unallocated partition of the microSD and select the New icon to cre
 The first partition will be the boot loader partition. Assign around _1 GB_ of space for this partition and the File System format will be _fat32_. **You must use the Label name _BOOT_ or else U-Boot will not function properly.** Use the partition configurations as shown below and click Add.
 
 The second partition will be the Linux Root File System partition. Assign _all of the remaining space_ for this partition and the File System format will be _ext3_. **Use the Label _RFS_ to indicate that this is the RFS.** Use the partition configurations as shown below and click Add.
+
+Once done select the Checkmark icon to apply the changes made to the microSD card.
+
+Click on the _BOOT_ partition then on the menu bar click Partition >> Manage Flags. Select the boot option, this way BeagleBone Black knows what partition is the boot partition when reading from the microSD card.
+
+Eject your microSD card and insert it back in. Navigate to the microSD partitions by accessing the /media/[username]/BOOT path and the /media/[username]/RFS path.**Make sure that you are in the correct directory path or you could erase all your files.**
+
+Enter the following commands in order to erase all files that may be present in these two partitions:
+```bash
+cd /media/[username]/RFS
+sudo rm -rf *
+cd /media/[username]/BOOT
+sudo rm -rf *
+```
