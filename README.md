@@ -77,15 +77,15 @@ sudo apt-get install git
 sudo git config --global user.email "[your_email@here]"
 ```
 
-Install the flex bison package.
-```bash
-sudo apt-get install flex bison
-```
-
 Get the latest version of the code for u-boot. _As of December 8, 2020 it is u-boot-2020.10_
 ```bash
 wget ftp://ftp.denx.de/pub/u-boot/u-boot-[version].tar.bz2
 tar -xjf u-boot-[version].tar.bz2
 ```
 
-cd u-boot
+Build the tools necessary to configure u-boot to set up the boot loader.
+```bash
+cd u-boot-[version]
+sudo apt-get install flex bison
+make sandbox_defconfig tools-only
+```
