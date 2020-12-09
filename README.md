@@ -163,7 +163,7 @@ obj-$(CONFIG_MCODE) += mcode.o
 The Kconfig file should include the following lines under _Character Drivers_:
 ```bash
 config MCODE
-	tristate “Morse Code Driver”
+	tristate “Enable MCODE”
 	default m
 	---help---
 		Select this option to enable the morse driver
@@ -186,9 +186,57 @@ sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bb.org_defconfig
 
 Run the following command to open gconfig.
 ```bash
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- gconfig
+sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- gconfig
 ```
 
-sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CFLAGS_MODULE=-fno-pic -j4 modules
+In the GUI go to Device Drivers >> Character devices.
+Double click on _Enable MCODE_ until it has a checkmark then click Save.
 
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/media/[username]/RFS/ CFLAGS_MODULE=-fno-pic modules_install
+Close the GUI.
+
+Compile the kernel source code. This process will take some time. It will generate a _uImage_ file and the device tree source files will also get compiled. A _am335x-boneblack.dtb_ file will also be generated.
+```bash
+sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage dtbs LOADADDR=0x80008000 -j4
+```
+
+Copy the _uImage_ file and the _am335x-boneblack.dtb_ file to the boot partition of your microSD card.
+```bash
+cp arch/arm/boot/uImage arch/arm/boot/dts/am335x-boneblack.dtb /media/[username]/BOOT/
+```
+
+Create a _uEnv.txt_ file that will be saved in the boot partition of your microSD card. The _uEnv.txt_ file should look as follows:
+```bash
+cdconsole=ttyS0,115200n8
+netargs=setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwait debug earlyprintk mem=512M
+netboot=echo Booting from microSD ...; setenv autoload no ; load mmc 0:1 ${loadaddr} uImage ; load mmc 0:1 ${fdtaddr} am335x-boneblack.dtb ; run netargs ; bootm ${loadaddr} - ${fdtaddr}
+uenvcmd=run netboot
+```
+
+Go to the cloned BeagleBone Black kernel directory. We will now build the Linux kernel modules._This will take a pretty long time!!!_
+```bash
+cd ~/[proj_directory]/linux/
+sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CFLAGS_MODULE=-fno-pic -j4 modules
+```
+
+Install the kernel modules in the Root File System of your microSD.
+```bash
+sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/media/[username]/RFS/ CFLAGS_MODULE=-fno-pic modules_install
+```
+
+## Step 6: Modifying Run Levels of the new Linux Distro
+Navigate into the run level 5 directory of the Root File System of your microSD card.
+```bash
+cd /media/[username]/RFS/etc/rc5.d
+```
+
+Open the _S01networking_ script file that runs when the kernel is getting initialized. You could use your own run-level script but for simplicity we will use the run-level script that initializes networking capabilities. Write the following lines of code under the line that mentions the _PATH_ variable:
+
+echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger
+echo none > /sys/class/leds/beaglebone\:green\:usr1/trigger
+echo none > /sys/class/leds/beaglebone\:green\:usr2/trigger
+echo none > /sys/class/leds/beaglebone\:green\:usr3/trigger
+echo “Welcome to Embedded Linux” > /dev/mcode
+
+The above lines turn off all the user leds of the BBB and writes to our _mcode_ driver that is now part of the kernel.
+
+##
