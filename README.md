@@ -14,13 +14,21 @@ Download and install the latest version of VirtualBox for your host system. You 
 ### Install VirtualBox Extension Pack
 Download and install the latest version of the VirtualBox Extension Pack to support USB3.0 devices. You will need this if using a modern microSD card. You can use this link for [VirtualBox 6.1.16 Oracle VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads). Set it up using the wizard installer.
 
-Open your VirtualBox Ubuntu VM. Go to Settings >> Ports >> USB. Enable the USB 3.0 Controller.
+Open your VirtualBox Ubuntu VM.
+Go to Settings >> Ports >> USB. Enable the USB 3.0 Controller. 
+Start your VirtualBox Ubuntu VM. Connect your microSD card. 
+On the menu bar of VirtualBox go to Devices >> USB and choose your microSD card. 
+Once you choose your microSD card is properly inserted on your VM, it should display a check mark next to it and a USB icon will display in the bottom left.
 
 ## Step 2: Partitioning and formatting your microSD card.
 Open a Terminal window.
 Download and install the gparted utility
 ```bash
 sudo apt-get install gparted
+```
+Once done, open the gparted Graphical User Interface that will allow you to format and partition the microSD card.
+```bash
+sudo gparted
 ```
 
 Once done with installing the required dependencies, to run this application open a Terminal/Command Line Prompt window, navigate to the directory where the file app.py is found, and do:
