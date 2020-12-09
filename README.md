@@ -112,4 +112,72 @@ Cross compile u-boot.
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
 ```
 
-## Step 4: Setting up the boot loader (Das U-Boot)
+## Step 4: Setting up the Linux Root File System on the microSD card
+Download the Root File System [here](https://www.dropbox.com/s/k93doprl261hwn2/rootfs.tar.xz?dl=0)
+
+Unzip the rfs tar file into the RFS directory of the microSD.
+```bash
+sudo tar -xvf ~/Downloads/rootfs.tar.xz -C /media/[username]/RFS
+```
+
+Move the contents inside the rootfs directory into the root directory of the RFS partition, and then remove the roofs directory.
+```bash
+sudo mv /media/[username]/RFS/rootfs/* /media/[username]/RFS/ && sudo rmdir rootfs
+```
+
+## Step 5: Compiling the Linux Kernel and Installing Kernel Modules
+Create a development directory and navigate to your development directory.
+```bash
+mkdir ~/[proj_directory] && cd ~/[proj_directory]
+```
+
+Download the source code of the Linux Kernel for the BeagleBone Black. (This might take a while)
+```bash
+git clone git://github.com/beagleboard/linux
+```
+
+Change directory into the new linux directory
+```bash
+cd linux
+```
+
+Set the kernel version to the latest version
+```
+git checkout 4.1
+```
+
+Change directory into the Linux character drivers directory
+```
+cd ~/[proj_directory]/linux/drivers/char
+```
+
+Make a directory for the driver and change into this directory. Here you will put the driver source code and the Makefile to compile the driver source code. This directory must be the same name as the driver name when it get loaded. We use _morse_bbb_ for the directory name since in this tutorial the driver name is _morse_bbb.c_.
+
+Create a Makefile in this directory that looks like this::
+
+Modify the Kconfig file in the parent directory.
+```bash
+obj-$(CONFIG_MORSEBBB) += morsebbb.o
+```
+
+The Kconfig file should include the following lines under _Character Drivers_:
+```bash
+config MORSEBBB
+	tristate “Morse Driver”
+	default m
+	---help---
+		Select this option to enable the morse driver
+```
+
+Modify the Makefile. The Makefile include the following line this:
+```bash
+obj-$(CONFIG_MORSEBBB) += morsebbb/
+```
+
+Change into the cloned BeagleBone Black kernel directory.
+
+W
+
+sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CFLAGS_MODULE=-fno-pic -j4 modules
+
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/media/[username]/RFS/ CFLAGS_MODULE=-fno-pic modules_install
