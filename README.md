@@ -239,4 +239,19 @@ echo “Welcome to Embedded Linux” > /dev/mcode
 
 The above lines turn off all the user leds of the BBB and writes to our _mcode_ driver that is now part of the kernel.
 
-##
+## Step 7: Set Up Serial Cable and Boot from microSD Card
+
+Install the picocom utility.
+```bash
+sudo apt-get install picocom
+```
+
+Connect your serial cable to your BBB as shown [here](https://www.dummies.com/computers/beaglebone/how-to-connect-the-beaglebone-black-via-serial-over-usb/) and to your host computer while your BBB is not connected to the power.
+
+Enable the serial cable in VirtualBox in the menu bar under Devices >> USB.
+
+Once your serial cable is recognized by your Ubuntu VM, run the following command to get picocom ready.
+```bash
+sudo picocom -b 115200 /dev/tty/USB0
+```
+Finally boot your BeagleBone Black from the microSD card as shown [here](https://elinux.org/Beagleboard:Booting_Ubuntu_on_BeagleBoard_Black) and enjoy your custom Linux distro with a Morse Code Driver cooked into it that welcomes you saying "Welcome to Embedded Linux" in morse code using the user LED0.
