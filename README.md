@@ -50,4 +50,4 @@ Click on the unallocated partition of the microSD and select the New icon to cre
 
 The first partition will be the boot loader partition. Assign around _1 GB_ of space for this partition and the File System format will be _fat32_. **You must use the Label name _BOOT_ or else U-Boot will not function properly.** Use the partition configurations as shown below and click Add.
 
-The second partition will be the Linux Root File System partition. Assign _all of the remaining space_ for this partition and the File System format will be _ext4_. Use the Label "RFS" to indicate that this is the RFS. Use the partition configurations as shown below and click Add.
+The second partition will be the Linux Root File System partition. Assign _all of the remaining space_ for this partition and the File System format will be _ext3_. **Use the Label _RFS_ to indicate that this is the RFS.** Use the partition configurations as shown below and click Add.
