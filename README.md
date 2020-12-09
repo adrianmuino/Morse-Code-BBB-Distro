@@ -89,3 +89,14 @@ cd u-boot-[version]
 sudo apt-get install flex bison
 make sandbox_defconfig tools-only
 ```
+
+Install the mkimage program to create the u-boot image.
+```bash
+sudo install tools/mkimage /usr/local/bin
+```
+
+Cross compile u-boot.
+```bash
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
+```
+
