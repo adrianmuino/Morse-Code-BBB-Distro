@@ -154,14 +154,14 @@ cd ~/[proj_directory]/linux/drivers/char
 Make a directory for the driver and change into this directory. Here you will put the driver source code and the Makefile to compile the driver source code. This directory must be the same name as the driver name when it get loaded. We use _mcode_ for the directory name since in this tutorial the driver name is _mcode.c_.
 
 Create a Makefile in this directory that looks like this:
-
-Modify the Kconfig file in the parent directory.
-```kconfig
+```makefile
 obj-$(CONFIG_MCODE) += mcode.o
 ```
 
+Modify the Kconfig file in the parent directory.
+
 The Kconfig file should include the following lines under _Character Drivers_:
-```bash
+```kconfig
 config MCODE
 	tristate “Enable MCODE”
 	default m
@@ -170,7 +170,7 @@ config MCODE
 ```
 
 Modify the Makefile. The Makefile include the following line this:
-```bash
+```makefile
 obj-$(CONFIG_MCODE) += mcode/
 ```
 
