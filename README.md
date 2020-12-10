@@ -205,7 +205,7 @@ cp arch/arm/boot/uImage arch/arm/boot/dts/am335x-boneblack.dtb /media/[username]
 ```
 
 Create a _uEnv.txt_ file that will be saved in the boot partition of your microSD card. The _uEnv.txt_ file should look as follows:
-```bash
+```text
 cdconsole=ttyS0,115200n8
 netargs=setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwait debug earlyprintk mem=512M
 netboot=echo Booting from microSD ...; setenv autoload no ; load mmc 0:1 ${loadaddr} uImage ; load mmc 0:1 ${fdtaddr} am335x-boneblack.dtb ; run netargs ; bootm ${loadaddr} - ${fdtaddr}
