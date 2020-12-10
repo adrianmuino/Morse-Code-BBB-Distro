@@ -156,7 +156,7 @@ Make a directory for the driver and change into this directory. Here you will pu
 Create a Makefile in this directory that looks like this:
 
 Modify the Kconfig file in the parent directory.
-```bash
+```kconfig
 obj-$(CONFIG_MCODE) += mcode.o
 ```
 
